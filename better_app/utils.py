@@ -3,6 +3,7 @@ Utils.
 """
 from typing import Dict, Optional, List
 from FlightRadar24 import FlightRadar24API
+import math
 
 
 def fetch_flight_data(
@@ -97,7 +98,15 @@ def bearing_from_positions(
     Returns:
         float: Bearing in degrees.
     """
-    raise NotImplementedError("TO MODIFY")
+    # Pas de degrés, c'est pas pratique mathématiquement
+    lat1, lon1, lat2, lon2 = map(math.radians,
+                                 [previous_latitude, previous_longitude, latitude, longitude])
+    diff_lon = lon2-lon1
+    y = math.sin(diff_lon) * math.cos(lat2)
+    x = math.cos(lat1) * math.sin(lat2) - math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon)
+    deviation_rad = math.atan2(y, x)
+    deviation_deg = math.degrees(deviation_rad) % 360
+    return (deviation_deg)
 
 
 def get_closest_round_angle(angle: float) -> int:
@@ -114,7 +123,10 @@ def get_closest_round_angle(angle: float) -> int:
             165, 180, 195, 210, 225, 240, 255, 270,
             285, 300, 315, 330, 345.
     """
-    raise NotImplementedError("TO MODIFY")
+    if ((angle % 15) <= 7.5):
+        return ((math.floor(angle // 15) * 15) % 360)
+    else:
+        return ((math.ceil(angle // 15) * 15) % 360)
 
 
 def get_custom_icon(round_angle: int) -> Dict:

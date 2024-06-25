@@ -25,4 +25,11 @@ def fetch_flight_data(
         List[Dict]: List of flights. A flight should be represented
             as a dictionary with latitude, longitude and id keys.
     """
-    raise NotImplementedError("TO MODIFY")
+    zone_de_vol = client.get_zones()[zone_str]
+    bounds = client.get_bounds(zone_de_vol)
+    vols = client.get_flights(aircraft_type=aircraft_type, airline=airline_icao, bounds=bounds)
+    return [{"latitude": vol.latitude,
+             "longitude": vol.longitude,
+             "id": vol.id,
+             } for vol in vols
+            ]
