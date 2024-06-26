@@ -73,8 +73,8 @@ def update_graph_live(n, previous_data):
                 dl.Popup(html.Div([
                     dcc.Markdown(f'''
                         **Identifiant du vol** : {flight['id']}.
-                        **Aéroport d'origine** : {flight['origin_airport_name']}.
-                        **Aéroport d'arrivée** : {flight['destination_airport_name']}.
+                        **Aéroport d'origine** : {flight['origin_airport_iata']}.
+                        **Aéroport d'arrivée** : {flight['destination_airport_iata']}.
                         **Vitesse au sol** : {flight['speed']}.
                     ''')
                 ]))
