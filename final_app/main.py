@@ -33,7 +33,20 @@ app.layout = html.Div([
     # Same as the local store but will lose the data
     # when the browser/tab closes.
     dcc.Store(id="session", storage_type="session"),
-    # TO MODIFY
+    html.Div([
+        html.H3("Sélection de la compagnie aérienne"),
+        dcc.Dropdown(
+            id='dropdown',
+            options=[
+                {'label': 'Air France', 'value': 'AFR'},
+                {'label': 'American Airlines', 'value': 'AAL'},
+                {'label': 'easyJet Europe', 'value': 'EJU'},
+                {'label': 'Emirates', 'value': 'UAE'},
+                {'label': 'Lufthansa', 'value': 'DLH'},
+            ],
+            value="AFR"
+        )
+    ]),
     dl.Map(
         id='map',
         center=[56, 10],
@@ -52,14 +65,14 @@ app.layout = html.Div([
 # TO MODIFY
 @app.callback(
     [Output('map', 'children'), Output('memory', 'data')],
-    [Input('interval-component', 'n_intervals')],
+    [Input('interval-component', 'n_intervals'), Input('dropdown', 'value')],
     [State('memory', 'data')]
 )
-def update_graph_live(n, previous_data):
+def update_graph_live(n, airline_icao, previous_data):
     # Retrieve a list of flight dictionaries with 'latitude', 'longitude', 'id'
     # and additional keys
     # TO MODIFY
-    data = fetch_flight_data(client=fr_api, airline_icao="AFR", zone_str="europe")
+    data = fetch_flight_data(client=fr_api, airline_icao=airline_icao, zone_str="europe")
     # Add a rotation_angle key to dictionaries
     if previous_data is None:
         for flight_data in data:

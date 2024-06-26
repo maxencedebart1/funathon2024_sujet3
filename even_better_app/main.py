@@ -72,7 +72,7 @@ def update_graph_live(n, previous_data):
             children=[
                 dl.Popup(html.Div([
                     dcc.Markdown(f'''
-                        Le vol au départ de {flight['origin_airport_iata']} 
+                        Le vol au départ de {flight['origin_airport_iata']}
                         et à destination de {flight['destination_airport_iata']}
                         a une vitesse au sol de {flight['speed']} noeuds.
                     ''')
