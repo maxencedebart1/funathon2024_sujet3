@@ -88,13 +88,9 @@ def update_graph_live(n, airline_icao, previous_data):
             children=[
                 dl.Popup(html.Div([
                     dcc.Markdown(f'''
-                        **Identifiant du vol**: {flight['id']}.
-
-                        **Aérport d'origine**: {flight['origin_airport_iata']}.
-
-                        **Aéroport de destination**: {flight['destination_airport_iata']}.
-
-                        **Vitesse au sol**: {flight['ground_speed']} noeuds.
+                        Le vol {flight['id']} au départ de {flight['origin_airport_iata']}
+                        et à destination de {flight['destination_airport_iata']}
+                        a une vitesse au sol de {flight['ground_speed']} noeuds.
                     ''')
                 ]))
             ],
