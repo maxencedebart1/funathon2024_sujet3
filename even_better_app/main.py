@@ -71,7 +71,12 @@ def update_graph_live(n, previous_data):
             # TO MODIFY
             children=[
                 dl.Popup(html.Div([
-                    html.H3(flight['id'])
+                    dcc.Markdown(f'''
+                        **Identifiant du vol** : {flight['id']}.
+                        **Aéroport d'origine** : {flight['origin_airport_name']}.
+                        **Aéroport d'arrivée** : {flight['destination_airport_name']}.
+                        **Vitesse au sol** : {flight['speed']}.
+                    ''')
                 ]))
             ],
             icon=get_custom_icon(

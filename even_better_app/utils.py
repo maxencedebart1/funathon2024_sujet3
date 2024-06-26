@@ -42,6 +42,10 @@ def fetch_flight_data(
             "latitude": flight.latitude,
             "longitude": flight.longitude,
             "id": flight.id,
+            "aircraft_code": flight.aircraft_code,
+            "origin_airport_name": flight.origin_airport_name,
+            "destination_airport_name": flight.destination_airport_name,
+            "speed": flight.ground_speed
         } for flight in flights
     ]
 
